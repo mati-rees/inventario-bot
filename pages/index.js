@@ -62,7 +62,60 @@ export default function Home() {
     // Se quita sola después de 4 segundos
     setTimeout(() => setAlertaPersonalizada(null), 4000)
   }
+  // 1. Añade esta función arriba de "confirmarAjusteStock"
+const enviarWhatsApp = async (mensaje) => {
+  const tkn = "TU_TOKEN_LARGO_AQUI"; // Asegúrate que sea el mismo que pegaste antes
+  const phoneId = "996700506860030";
+  const miNumero = "56946426808"; // Tu número real sin el +
 
+  console.log("Intentando enviar a:", miNumero); // Esto nos dirá en la consola a qué número apunta
+
+  try {
+    const response = await fetch(`https://graph.facebook.com/v18.0/${phoneId}/messages`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${tkn}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        messaging_product: "whatsapp",
+        to: miNumero,
+        type: "template",
+        template: { 
+          name: "hello_world", 
+          language: { code: "en_us" } 
+        }
+      })
+    });
+
+    const data = await response.json();
+    if (!response.ok) {
+      console.error("Detalle del error de Meta:", data); // ¡Esto nos dirá EXACTAMENTE qué no le gusta a Meta!
+    } else {
+      console.log("¡Mensaje enviado con éxito!", data);
+    }
+  } catch (error) {
+    console.error("Error de conexión:", error);
+  }
+}
+
+// 2. Modifica la función verificarAlerta que ya tenías
+const verificarAlerta = (producto, nuevaCant) => {
+  let msg = "";
+  if (nuevaCant === 0) {
+    msg = `🚨 ¡URGENTE! El producto "${producto.nombre}" se ha agotado por completo.`;
+  } else if (nuevaCant <= stockCritico) {
+    msg = `⚠️ ATENCIÓN: El stock de "${producto.nombre}" está bajo (${nuevaCant} unidades restantes).`;
+  }
+
+  if (msg) {
+    // Esto muestra la alerta en la web (lo que ya teníamos)
+    dispararNotificacion(msg, nuevaCant === 0 ? 'error' : 'warning');
+    
+    // NUEVO: Esto envía el mensaje real a tu celular
+    enviarWhatsApp(msg);
+  }
+}
   async function confirmarAjusteStock() {
     const cant = parseInt(cantidadInput)
     if (isNaN(cant) || cant <= 0) return alert("Cantidad inválida")
