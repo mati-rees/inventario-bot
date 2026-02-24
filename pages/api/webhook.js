@@ -34,8 +34,13 @@ export default async function handler(req, res) {
   if (req.method === 'GET') {
     const token = req.query['hub.verify_token'];
     const challenge = req.query['hub.challenge'];
-    if (token === process.env.MI_TOKEN_META) return res.status(200).send(challenge);
-    return res.status(403).send("Error");
+
+    // Ponemos el token directamente entre comillas
+    if (token === "MatiBodega2026") {
+      return res.status(200).send(challenge);
+    }
+    
+    return res.status(403).send("Error de token");
   }
 
   // 2. RECEPCIÓN DE MENSAJES
