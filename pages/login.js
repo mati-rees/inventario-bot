@@ -39,7 +39,7 @@ export default function Login() {
     <div className="min-h-screen bg-slate-100 flex items-center justify-center p-6">
       <div className="bg-white p-8 rounded-3xl shadow-xl max-w-sm w-full">
         <h1 className="text-3xl font-bold text-slate-800 mb-2">Bienvenido 📦</h1>
-        <p className="text-slate-500 mb-8 text-sm">Ingresa a tu bodega pro</p>
+        <p className="text-slate-500 mb-8 text-sm">StockUp</p>
         
         <form className="grid gap-4">
           <input 

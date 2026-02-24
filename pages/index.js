@@ -64,7 +64,7 @@ export default function Home() {
   }
   // 1. Añade esta función arriba de "confirmarAjusteStock"
 const enviarWhatsApp = async (mensaje) => {
-  const tkn = "TU_TOKEN_LARGO_AQUI"; // Asegúrate que sea el mismo que pegaste antes
+  const tkn = "EAAMNe1rjVWEBQ6ZATcSxvzKiM03CKM3efN3VgI5aLxXbLh6ZBnkKMQ7TzCZB6BxckM6D9ZCUfNYqgkfXgaTbvrrRT3DUJi2J1d4RaBbmHLH9siwWcKzIbCfscU2OhmHiezNK4sLsBO3Rq7m2sGUAgaJGQrqChIzg0hj9KQaVf9FKKNs62hGp8nCdJDZAG"; // Asegúrate que sea el mismo que pegaste antes
   const phoneId = "996700506860030";
   const miNumero = "56946426808"; // Tu número real sin el +
 
@@ -170,7 +170,7 @@ const verificarAlerta = (producto, nuevaCant) => {
 
   return (
     <div className="flex min-h-screen bg-slate-50 font-sans text-slate-900 overflow-x-hidden">
-      <Head><title>Bodega Pro | Panel</title></Head>
+      <Head><title>StockUp | Panel</title></Head>
 
       {/* NOTIFICACIÓN FLOTANTE (UX/UI) */}
       {alertaPersonalizada && (
@@ -187,7 +187,7 @@ const verificarAlerta = (producto, nuevaCant) => {
       {/* SIDEBAR */}
       <aside className={`${sidebarAbierto ? 'w-64' : 'w-20'} bg-[#0f172a] transition-all duration-300 flex flex-col text-white fixed h-full z-20`}>
         <div className="p-6 flex items-center justify-between border-b border-white/5">
-          {sidebarAbierto && <span className="font-black text-xl tracking-tighter text-blue-400">BODEGA PRO</span>}
+          {sidebarAbierto && <span className="font-black text-xl tracking-tighter text-blue-400">StockUp</span>}
           <button onClick={() => setSidebarAbierto(!sidebarAbierto)} className="hover:bg-slate-800 p-2 rounded-lg">☰</button>
         </div>
         <nav className="flex-1 px-4 space-y-2 mt-6">
